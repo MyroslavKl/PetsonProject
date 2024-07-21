@@ -2,7 +2,7 @@
 
 namespace Application.DTOs.ImageDTOs;
 
-public class CreateImageDto
+public class UpsertImage
 {
     [Required, Url] 
     public string Url { get; set; } = string.Empty;
