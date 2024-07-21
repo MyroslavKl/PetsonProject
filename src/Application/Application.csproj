@@ -11,6 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="DTOs\PetDTOs\" />
+    <Folder Include="DTOs\ReserveDTOs\" />
+    <Folder Include="DTOs\UserDTOs\" />
     <Folder Include="Profiles\" />
   </ItemGroup>
 
