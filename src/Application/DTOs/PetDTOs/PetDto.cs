@@ -1,9 +1,8 @@
-﻿using Domain.Entities.Base;
+﻿namespace Application.DTOs.PetDTOs;
 
-namespace Domain.Entities;
-
-public class Pet:BaseEntity
+public class PetDto
 {
+    public int Id { get; set; }
     public string Name { get; set; } = string.Empty;
     public DateOnly DateOfBirth { get; set; }
     public DateTime StartDate { get; set; } //start date in shelter
@@ -12,6 +11,4 @@ public class Pet:BaseEntity
     public string Species { get; set; } = string.Empty;
     public bool IsVaccination { get; set; } = true;
     public string Description { get; set; } = string.Empty;
-    
-    public ICollection<Image> Images { get; set; } = new List<Image>();
 }
