@@ -1,6 +1,9 @@
-﻿namespace Application.Persistence.Repositories;
+﻿using Application.Persistence.Repositories.Common;
+using Domain.Entities;
 
-public interface IUserRepository
+namespace Application.Persistence.Repositories;
+
+public interface IUserRepository:IRepository<User>
 {
     
 }
