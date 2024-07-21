@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Application.DTOs.AuthDtos;
 
 namespace Application.DTOs.UserDTOs;
 
-public class CreateUserDto
+public class CreateUserDto:LoginDto
 {
     [Required,MaxLength(25)]
     public string FirstName { get; set; } = string.Empty;
