@@ -9,4 +9,6 @@ public class CreateUserDto:LoginDto
     public string FirstName { get; set; } = string.Empty;
     [Required,MaxLength(25)]
     public string LastName { get; set; } = string.Empty;
+    [Required]
+    public string Gender { get; set; } = string.Empty;
 }
