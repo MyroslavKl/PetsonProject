@@ -39,18 +39,16 @@ public class UserService:IUserService
         return userByIdDto;
     }
 
-    public async Task UpdateUserName(string userName, UpdateUserDto userDto) /////FullName need
+    public async Task UpdateUserName(string userName, User user) /////FullName need
     {
-        userDto.FirstName = userName;
-        var user = _mapper.Map<User>(userDto);
+        user.FirstName = userName;
         _userRepository.UpdateAsync(user);
         await _userRepository.SaveChangesAsync();
     }
 
-    public async Task UpdatePassword(string password, UpdateUserDto userDto)
+    public async Task UpdatePassword(string password, User user)
     {
-        userDto.Password = password;
-        var user = _mapper.Map<User>(userDto);
+        user.Password = password;
         _userRepository.UpdateAsync(user);
         await _userRepository.SaveChangesAsync();
     }
