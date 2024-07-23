@@ -11,5 +11,5 @@ public interface IUserService
     Task UpdateUserName(string userName,UpdateUserDto user);
     Task UpdatePassword(string password,UpdateUserDto user);
     Task GrandRole(User user,Role role);
-    Task DeleteAccount();
+    Task DeleteAccount(User user);
 }
