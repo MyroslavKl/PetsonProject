@@ -5,10 +5,10 @@ namespace Application.DTOs.UserDTOs;
 
 public class CreateUserDto:LoginDto
 {
-    [Required,MaxLength(25)]
+    [MaxLength(25)]
     public string FirstName { get; set; } = string.Empty;
-    [Required,MaxLength(25)]
+    [MaxLength(25)] 
     public string LastName { get; set; } = string.Empty;
-    [Required]
+    public DateOnly DateOfBirth { get; set; }
     public string Gender { get; set; } = string.Empty;
 }
