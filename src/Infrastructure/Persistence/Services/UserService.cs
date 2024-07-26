@@ -39,9 +39,10 @@ public class UserService:IUserService
         return userByIdDto;
     }
 
-    public async Task UpdateUserName(string userName, User user) /////FullName need
+    public async Task UpdateUserFullName(string firstName,string lastName, User user) 
     {
-        user.FirstName = userName;
+        user.FirstName = firstName;
+        user.LastName = lastName;
         _userRepository.UpdateAsync(user);
         await _userRepository.SaveChangesAsync();
     }

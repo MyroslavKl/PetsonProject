@@ -43,10 +43,10 @@ namespace API.Controllers
         }
 
         [HttpPatch("name/{userId}")]
-        public async Task ChangeName(string userName,[FromRoute]int userId)
+        public async Task ChangeName(string firstName,string lastName,[FromRoute]int userId)
         {
             var user = await _userRepository.GetOneAsync(obj => obj.Id == userId);
-            await _userService.UpdateUserName(userName, user);
+            await _userService.UpdateUserFullName(firstName,lastName, user);
         }
         [HttpPatch("password/{userId}")]
         public async Task ChangePassword(string password,[FromRoute]int userId)
