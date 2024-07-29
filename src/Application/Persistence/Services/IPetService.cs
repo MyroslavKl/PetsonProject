@@ -6,11 +6,11 @@ namespace Application.Persistence.Services;
 
 public interface IPetService
 {
-    IEnumerable<PetDto> GetAllUsers();
+    IEnumerable<PetDto> GetAllPets();
     Task<IEnumerable<PetDto>> GetPetBySpecies(string species);
     Task<IEnumerable<PetDto>> GetPetByType(string type);
     Task AddPet(UpsertPetDto pet);
-    Task UpdatePetName(string petName,UpsertPetDto pet);
-    Task UpdateDescription(string text,UpsertPetDto pet);
-    Task DeletePetFromSite(int id);
+    Task UpdatePetName(string petName,Pet pet);
+    Task UpdateDescription(string text,Pet pet);
+    Task DeletePetFromSite(Pet pet);
 }

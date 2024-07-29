@@ -20,7 +20,7 @@ public class PetService:IPetService
         _petAdditional = petAdditional;
     }
     
-    public IEnumerable<PetDto> GetAllUsers()
+    public IEnumerable<PetDto> GetAllPets()
     {
         var pets = _petRepository.GetAllAsync();
         var petsDto = _mapper.Map<IEnumerable<PetDto>>(pets);
@@ -48,21 +48,20 @@ public class PetService:IPetService
         await _petRepository.SaveChangesAsync();
     }
 
-    public async Task UpdatePetName(string petName, UpsertPetDto petDto)
+    public async Task UpdatePetName(string petName, Pet pet)
     {
-        petDto.Name = petName;
-        await _petAdditional.PetUpdate(petDto);
+        pet.Name = petName;
+        await _petAdditional.PetUpdate(pet);
     }
 
-    public async Task UpdateDescription(string text, UpsertPetDto petDto)
+    public async Task UpdateDescription(string text, Pet pet)
     {
-        petDto.Description = text;
-        await _petAdditional.PetUpdate(petDto);
+        pet.Description = text;
+        await _petAdditional.PetUpdate(pet);
     }
 
-    public async Task DeletePetFromSite(int id)
+    public async Task DeletePetFromSite(Pet pet)
     {
-        var pet = await _petRepository.GetOneAsync(obj => obj.Id == id);
         _petRepository.DeleteAsync(pet);
         await _petRepository.SaveChangesAsync();
     }

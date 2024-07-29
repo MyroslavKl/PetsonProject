@@ -16,9 +16,8 @@ public class PetAdditional
         _mapper = mapper;
     }
 
-    public async Task PetUpdate(UpsertPetDto petDto)
+    public async Task PetUpdate(Pet pet)
     {
-        var pet = _mapper.Map<Pet>(petDto);
         _petRepository.UpdateAsync(pet);
         await _petRepository.SaveChangesAsync();
     }
