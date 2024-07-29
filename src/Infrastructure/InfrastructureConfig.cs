@@ -22,7 +22,9 @@ public static class InfrastructureConfig
         services.AddScoped<IReserveRepository,ReserveRepository>();
         services.AddScoped<IRoleRepository,RoleRepository>();
         services.AddScoped<IUserRepository,UserRepository>();
+        services.AddScoped<IPetRepository,PetRepository>();
         services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IPetService, PetService>();
         return services;
     }
 }

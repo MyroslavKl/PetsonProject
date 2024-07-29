@@ -42,10 +42,9 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddPet([FromBody]UpsertPetDto pet)
+        public async Task AddPet([FromBody]UpsertPetDto pet)
         {
-            _petService.AddPet(pet);
-            return Ok("Pet is added");
+            await _petService.AddPet(pet);
         }
 
         [HttpPatch("name-update/{id}/{name}")]

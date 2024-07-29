@@ -1,4 +1,5 @@
-﻿using Application.DTOs.UserDTOs;
+﻿using Application.DTOs.PetDTOs;
+using Application.DTOs.UserDTOs;
 using AutoMapper;
 using Domain.Entities;
 
@@ -10,6 +11,8 @@ public class ProfileMapper:Profile
     {
         CreateMap<User,UserDto>();
         CreateMap<CreateUserDto, User>();
+        CreateMap<Pet, PetDto>();
+        CreateMap<UpsertPetDto, Pet>();
 
     }
 }
