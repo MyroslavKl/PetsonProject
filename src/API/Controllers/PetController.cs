@@ -26,16 +26,16 @@ namespace API.Controllers
             return pets;
         }
 
-        [HttpGet("petSpecies/{species}")]
+        [HttpGet("petSpecies")]
 
-        public async Task<IEnumerable<PetDto>> GetPetsBySpecies([FromRoute]string species)
+        public async Task<IEnumerable<PetDto>> GetPetsBySpecies([FromBody]string species)
         {
             var pets = await _petService.GetPetBySpecies(species);
             return pets;
         }
-        [HttpGet("petType/{type}")]
+        [HttpGet("petType")]
 
-        public async Task<IEnumerable<PetDto>> GetPetsByType([FromRoute]string type)
+        public async Task<IEnumerable<PetDto>> GetPetsByType([FromBody]string type)
         {
             var pets = await _petService.GetPetByType(type);
             return pets;
@@ -47,14 +47,14 @@ namespace API.Controllers
             await _petService.AddPet(pet);
         }
 
-        [HttpPatch("name-update/{id}/{name}")]
-        public async Task UpdateName([FromRoute]int id,[FromRoute]string name)
+        [HttpPatch("name-update/{id}")]
+        public async Task UpdateName([FromRoute]int id,[FromBody]string name)
         {
             var pet = await _petRepository.GetOneAsync(obj => obj.Id == id);
             await _petService.UpdatePetName(name,pet);
         }
-        [HttpPatch("description-update/{id}/{description}")]
-        public async Task UpdateDescription([FromRoute]int id,[FromRoute]string description)
+        [HttpPatch("description-update/{id}")]
+        public async Task UpdateDescription([FromRoute]int id,[FromBody]string description)
         {
             var pet = await _petRepository.GetOneAsync(obj => obj.Id == id);
             await _petService.UpdateDescription(description,pet);

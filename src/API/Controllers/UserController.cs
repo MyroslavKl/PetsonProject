@@ -28,8 +28,8 @@ namespace API.Controllers
             return users;
         }
 
-        [HttpGet("email/{email}")]
-        public async Task<UserDto> GetUserByEmail([FromRoute]string email)
+        [HttpGet("email")]
+        public async Task<UserDto> GetUserByEmail([FromBody]string email)
         {
             var user = await _userService.GetUserByEmail(email);
             return user;

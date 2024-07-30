@@ -33,8 +33,8 @@ namespace API.Controllers
             return Ok("Image successfully added");
         }
 
-        [HttpPatch("{url}/{id}")]
-        public async Task ChangePhoto([FromRoute]string url, [FromRoute]int id)
+        [HttpPatch("change-url/{id}")]
+        public async Task ChangePhoto([FromBody]string url, [FromRoute]int id)
         {
             var image = await _imageRepository.GetOneAsync(obj => obj.Id ==id);
             await _imageService.UpdateImage(url,image);
