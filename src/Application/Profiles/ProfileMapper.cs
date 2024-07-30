@@ -11,14 +11,14 @@ public class ProfileMapper:Profile
 {
     public ProfileMapper()
     {
-        CreateMap<User,UserDto>();
+        CreateMap<User,UserDto>().ReverseMap();
         CreateMap<CreateUserDto, User>();
-        CreateMap<Pet, PetDto>();
+        CreateMap<Pet, PetDto>().ReverseMap();
         CreateMap<UpsertPetDto, Pet>();
         CreateMap<UpsertReserveDto, Reserve>();
-        CreateMap<ReserveDto, Reserve>();
+        CreateMap<ReserveDto, Reserve>().ReverseMap();
         CreateMap<UpsertImage, Image>();
-        CreateMap<ImageDto, Image>();
+        CreateMap<ImageDto, Image>().ReverseMap();
 
     }
 }
