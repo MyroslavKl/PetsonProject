@@ -32,14 +32,14 @@ public class PetService:IPetService
 
     public async Task<IEnumerable<PetDto>> GetPetBySpecies(string species)
     {
-        var pets = await _petRepository.GetOneOrManyPets(obj => obj.Species == species);
+        var pets = _petRepository.GetAllAsync(obj => obj.Species == species);
         var petsDto = _mapper.Map<IEnumerable<PetDto>>(pets);
         return petsDto;
     }
 
     public async  Task<IEnumerable<PetDto>> GetPetByType(string type)
     {
-        var pets = await _petRepository.GetOneOrManyPets(obj => obj.TypeOfPet == type);
+        var pets = _petRepository.GetAllAsync(obj => obj.TypeOfPet == type);
         var petsDto = _mapper.Map<IEnumerable<PetDto>>(pets);
         return petsDto;
     }

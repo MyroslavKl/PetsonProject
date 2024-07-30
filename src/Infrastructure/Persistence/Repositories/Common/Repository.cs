@@ -14,9 +14,14 @@ public class Repository<TEntity>:IRepository<TEntity> where TEntity: class
         _dbContext = dbContext;
         _dbSet = _dbContext.Set<TEntity>();
     }
-    public IEnumerable<TEntity> GetAllAsync()
+    public IEnumerable<TEntity> GetAllAsync(Expression<Func<TEntity, bool>>? filter = null)
     {
         IQueryable<TEntity> query = _dbSet;
+        if (filter is not null)
+        {
+            query = query.Where(filter);
+        }
+
         return query;
     }
 

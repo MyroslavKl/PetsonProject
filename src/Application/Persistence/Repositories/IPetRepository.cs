@@ -6,5 +6,4 @@ namespace Application.Persistence.Repositories;
 
 public interface IPetRepository:IRepository<Pet>
 {
-   Task<IEnumerable<Pet>> GetOneOrManyPets(Expression<Func<Pet, bool>>? filter = null);
 }

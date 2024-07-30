@@ -13,15 +13,4 @@ public class PetRepository:Repository<Pet>,IPetRepository
         _context = dbContext;
     }
     
-
-    public async Task<IEnumerable<Pet>> GetOneOrManyPets(Expression<Func<Pet, bool>>? filter = null)
-    {
-        IQueryable<Pet> query = _context.Pets;
-        if (filter is not null)
-        {
-            query = query.Where(filter);
-        }
-
-        return query;
-    }
 }
