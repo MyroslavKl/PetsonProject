@@ -1,4 +1,5 @@
-﻿using Application.DTOs.PetDTOs;
+﻿using Application.DTOs.ImageDTOs;
+using Application.DTOs.PetDTOs;
 using Application.DTOs.UserDTOs;
 using Domain.Entities;
 
@@ -13,4 +14,5 @@ public interface IPetService
     Task UpdatePetName(string petName,Pet pet);
     Task UpdateDescription(string text,Pet pet);
     Task DeletePetFromSite(Pet pet);
+    IEnumerable<ImageDto> GetAllImages(int id);
 }
