@@ -6,4 +6,5 @@ public class UpsertImage
 {
     [Required, Url] 
     public string Url { get; set; } = string.Empty;
+    public int PetId { get; set; }
 }

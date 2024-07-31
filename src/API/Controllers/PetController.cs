@@ -28,14 +28,14 @@ namespace API.Controllers
 
         [HttpGet("petSpecies")]
 
-        public async Task<IEnumerable<PetDto>> GetPetsBySpecies([FromBody]string species)
+        public async Task<IEnumerable<PetDto>> GetPetsBySpecies(string species)
         {
             var pets = await _petService.GetPetBySpecies(species);
             return pets;
         }
         [HttpGet("petType")]
 
-        public async Task<IEnumerable<PetDto>> GetPetsByType([FromBody]string type)
+        public async Task<IEnumerable<PetDto>> GetPetsByType(string type)
         {
             var pets = await _petService.GetPetByType(type);
             return pets;

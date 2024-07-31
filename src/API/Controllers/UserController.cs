@@ -29,7 +29,7 @@ namespace API.Controllers
         }
 
         [HttpGet("email")]
-        public async Task<UserDto> GetUserByEmail([FromBody]string email)
+        public async Task<UserDto> GetUserByEmail(string email)
         {
             var user = await _userService.GetUserByEmail(email);
             return user;

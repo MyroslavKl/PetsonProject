@@ -27,14 +27,14 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddImage(UpsertImage upsertImage)
+        public async Task<IActionResult> AddImage([FromBody]UpsertImage upsertImage)
         {
             await _imageService.AddImage(upsertImage);
             return Ok("Image successfully added");
         }
 
         [HttpPatch("change-url/{id}")]
-        public async Task ChangePhoto([FromBody]string url, [FromRoute]int id)
+        public async Task ChangePhoto(string url, [FromRoute]int id)
         {
             var image = await _imageRepository.GetOneAsync(obj => obj.Id ==id);
             await _imageService.UpdateImage(url,image);

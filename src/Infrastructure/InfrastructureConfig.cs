@@ -25,6 +25,8 @@ public static class InfrastructureConfig
         services.AddScoped<IPetRepository,PetRepository>();
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IPetService, PetService>();
+        services.AddScoped<IReserveService, ReserveService>();
+        services.AddScoped<IImageService, ImageService>();
         return services;
     }
 }

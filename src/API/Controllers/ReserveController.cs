@@ -27,7 +27,7 @@ namespace API.Controllers
         }
 
         [HttpGet("specific-date")]
-        public async Task<IEnumerable<ReserveDto>> GetByDate([FromBody] DateTime date)
+        public async Task<IEnumerable<ReserveDto>> GetByDate(DateTime date)
         {
            var reserves = await _reserveService.GetReservesByDate(date);
            return reserves;
