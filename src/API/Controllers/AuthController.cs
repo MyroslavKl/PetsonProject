@@ -20,13 +20,13 @@ namespace API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
         {
-            return Ok(await _authService.Login(loginDto));
+            return Ok(await _authService.LoginAsync(loginDto));
         }
         
         [HttpPost("register")]
         public async Task Register([FromBody] CreateUserDto createUserDto)
         {
-            await _authService.Register(createUserDto);
+            await _authService.RegisterAsync(createUserDto);
         }
     }
 }

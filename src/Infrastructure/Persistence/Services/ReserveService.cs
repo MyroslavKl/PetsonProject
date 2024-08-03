@@ -18,26 +18,26 @@ public class ReserveService:IReserveService
     }
     public IEnumerable<ReserveDto> GetAllReserves(int userId)
     {
-        var reserves = _reserveRepository.GetAllAsync(obj => obj.UserId == userId);
+        var reserves = _reserveRepository.GetAll(obj => obj.UserId == userId);
         var reservesDto = _mapper.Map<IEnumerable<ReserveDto>>(reserves);
         return reservesDto;
     }
 
-    public async Task<IEnumerable<ReserveDto>> GetReservesByDate(DateTime date)
+    public async Task<IEnumerable<ReserveDto>> GetReservesByDateAsync(DateTime date)
     {
-        var reserves = _reserveRepository.GetAllAsync(obj => obj.ReserveDate == date);
+        var reserves = _reserveRepository.GetAll(obj => obj.ReserveDate == date);
         var reservesDto = _mapper.Map<IEnumerable<ReserveDto>>(reserves);
         return reservesDto;
     }
     
 
-    public async Task DeleteReserve(Reserve reserve)
+    public async Task DeleteReserveAsync(Reserve reserve)
     {
-        _reserveRepository.DeleteAsync(reserve);
+        _reserveRepository.Delete(reserve);
         await _reserveRepository.SaveChangesAsync();
     }
 
-    public async Task CreateReserve(UpsertReserveDto reserveDto)
+    public async Task CreateReserveAsync(UpsertReserveDto reserveDto)
     {
         var reserve = _mapper.Map<Reserve>(reserveDto);
         await _reserveRepository.InsertAsync(reserve);

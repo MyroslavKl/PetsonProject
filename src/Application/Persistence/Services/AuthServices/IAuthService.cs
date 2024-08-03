@@ -5,6 +5,6 @@ namespace Application.Persistence.Services.AuthServices;
 
 public interface IAuthService
 {
-    Task Register(CreateUserDto createUserDto);
-    Task<string> Login(LoginDto loginDto);
+    Task RegisterAsync(CreateUserDto createUserDto);
+    Task<string> LoginAsync(LoginDto loginDto);
 }

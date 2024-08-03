@@ -31,14 +31,14 @@ namespace API.Controllers
         [HttpGet("email")]
         public async Task<UserDto> GetUserByEmail(string email)
         {
-            var user = await _userService.GetUserByEmail(email);
+            var user = await _userService.GetUserByEmailAsync(email);
             return user;
         }
 
         [HttpGet("{userId}")]
         public async Task<UserDto> GetUserById([FromRoute] int userId)
         {
-            var user = await _userService.GetUserById(userId);
+            var user = await _userService.GetUserByIdAsync(userId);
             return user;
         }
 
@@ -46,13 +46,13 @@ namespace API.Controllers
         public async Task ChangeName(string firstName,string lastName,[FromRoute]int userId)
         {
             var user = await _userRepository.GetOneAsync(obj => obj.Id == userId);
-            await _userService.UpdateUserFullName(firstName,lastName, user);
+            await _userService.UpdateUserFullNameAsync(firstName,lastName, user);
         }
         [HttpPatch("password/{userId}")]
         public async Task ChangePassword(string password,[FromRoute]int userId)
         {
             var user = await _userRepository.GetOneAsync(obj => obj.Id == userId);
-            await _userService.UpdatePassword(password, user);
+            await _userService.UpdatePasswordAsync(password, user);
         }
 
         [HttpPatch("{userId}/grand/{roleId}")]
@@ -61,14 +61,14 @@ namespace API.Controllers
             var user = await _userRepository.GetOneAsync(obj => obj.Id == userId);
             var role = await _roleRepository.GetOneAsync(obj => obj.Id == roleId);
 
-            await _userService.GrandRole(user,role);
+            await _userService.GrandRoleAsync(user,role);
         }
          
         [HttpDelete("{userId}")]
         public async Task<IActionResult> DeleteAccount([FromRoute] int userId)
         {
             var user = await _userRepository.GetOneAsync(obj => obj.Id == userId);
-            await _userService.DeleteAccount(user);
+            await _userService.DeleteAccountAsync(user);
             return Ok("Account successfully deleted");
         }
 

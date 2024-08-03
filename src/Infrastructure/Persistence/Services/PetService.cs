@@ -25,47 +25,47 @@ public class PetService:IPetService
     
     public IEnumerable<PetDto> GetAllPets()
     {
-        var pets = _petRepository.GetAllAsync();
+        var pets = _petRepository.GetAll();
         var petsDto = _mapper.Map<IEnumerable<PetDto>>(pets);
         return petsDto;
     }
 
-    public async Task<IEnumerable<PetDto>> GetPetBySpecies(string species)
+    public async Task<IEnumerable<PetDto>> GetPetBySpeciesAsync(string species)
     {
-        var pets = _petRepository.GetAllAsync(obj => obj.Species == species);
+        var pets = _petRepository.GetAll(obj => obj.Species == species);
         var petsDto = _mapper.Map<IEnumerable<PetDto>>(pets);
         return petsDto;
     }
 
-    public async  Task<IEnumerable<PetDto>> GetPetByType(string type)
+    public async  Task<IEnumerable<PetDto>> GetPetByTypeAsync(string type)
     {
-        var pets = _petRepository.GetAllAsync(obj => obj.TypeOfPet == type);
+        var pets = _petRepository.GetAll(obj => obj.TypeOfPet == type);
         var petsDto = _mapper.Map<IEnumerable<PetDto>>(pets);
         return petsDto;
     }
 
-    public async Task AddPet(UpsertPetDto petDto)
+    public async Task AddPetAsync(UpsertPetDto petDto)
     {
         var pet = _mapper.Map<Pet>(petDto);
         await _petRepository.InsertAsync(pet);
         await _petRepository.SaveChangesAsync();
     }
 
-    public async Task UpdatePetName(string petName, Pet pet)
+    public async Task UpdatePetNameAsync(string petName, Pet pet)
     {
         pet.Name = petName;
         await _petAdditional.PetUpdate(pet);
     }
 
-    public async Task UpdateDescription(string text, Pet pet)
+    public async Task UpdateDescriptionAsync(string text, Pet pet)
     {
         pet.Description = text;
         await _petAdditional.PetUpdate(pet);
     }
 
-    public async Task DeletePetFromSite(Pet pet)
+    public async Task DeletePetFromSiteAsync(Pet pet)
     {
-        _petRepository.DeleteAsync(pet);
+        _petRepository.Delete(pet);
         await _petRepository.SaveChangesAsync();
     }
 

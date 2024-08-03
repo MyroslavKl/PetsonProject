@@ -30,41 +30,41 @@ namespace API.Controllers
 
         public async Task<IEnumerable<PetDto>> GetPetsBySpecies(string species)
         {
-            var pets = await _petService.GetPetBySpecies(species);
+            var pets = await _petService.GetPetBySpeciesAsync(species);
             return pets;
         }
         [HttpGet("petType")]
 
         public async Task<IEnumerable<PetDto>> GetPetsByType(string type)
         {
-            var pets = await _petService.GetPetByType(type);
+            var pets = await _petService.GetPetByTypeAsync(type);
             return pets;
         }
 
         [HttpPost]
         public async Task AddPet([FromBody]UpsertPetDto pet)
         {
-            await _petService.AddPet(pet);
+            await _petService.AddPetAsync(pet);
         }
 
         [HttpPatch("name-update/{id}")]
         public async Task UpdateName([FromRoute]int id,[FromBody]string name)
         {
             var pet = await _petRepository.GetOneAsync(obj => obj.Id == id);
-            await _petService.UpdatePetName(name,pet);
+            await _petService.UpdatePetNameAsync(name,pet);
         }
         [HttpPatch("description-update/{id}")]
         public async Task UpdateDescription([FromRoute]int id,[FromBody]string description)
         {
             var pet = await _petRepository.GetOneAsync(obj => obj.Id == id);
-            await _petService.UpdateDescription(description,pet);
+            await _petService.UpdateDescriptionAsync(description,pet);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePet([FromRoute] int id)
         {
             var pet = await _petRepository.GetOneAsync(obj => obj.Id == id);
-            await _petService.DeletePetFromSite(pet);
+            await _petService.DeletePetFromSiteAsync(pet);
             return Ok("Pet is deleted successfully");
         }
     }

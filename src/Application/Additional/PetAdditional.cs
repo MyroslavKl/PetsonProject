@@ -18,7 +18,7 @@ public class PetAdditional
 
     public async Task PetUpdate(Pet pet)
     {
-        _petRepository.UpdateAsync(pet);
+        _petRepository.Update(pet);
         await _petRepository.SaveChangesAsync();
     }
 

@@ -14,7 +14,7 @@ public class Repository<TEntity>:IRepository<TEntity> where TEntity: class
         _dbContext = dbContext;
         _dbSet = _dbContext.Set<TEntity>();
     }
-    public IEnumerable<TEntity> GetAllAsync(Expression<Func<TEntity, bool>>? filter = null)
+    public IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>>? filter = null)
     {
         IQueryable<TEntity> query = _dbSet;
         if (filter is not null)
@@ -41,12 +41,12 @@ public class Repository<TEntity>:IRepository<TEntity> where TEntity: class
         await _dbSet.AddAsync(obj);
     }
 
-    public void UpdateAsync(TEntity obj)
+    public void Update(TEntity obj)
     {
         _dbSet.Update(obj);
     }
 
-    public void DeleteAsync(TEntity obj)
+    public void Delete(TEntity obj)
     {
         _dbSet.Remove(obj);
     }

@@ -6,7 +6,7 @@ namespace Application.Persistence.Services;
 public interface IImageService
 {
     IEnumerable<ImageDto> GetAllImages(int petId);
-    Task AddImage(UpsertImage image);
-    Task UpdateImage(string url, Image image);
+    Task AddImageAsync(UpsertImage image);
+    Task UpdateImageAsync(string url, Image image);
     
 }

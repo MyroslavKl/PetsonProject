@@ -6,10 +6,10 @@ namespace Application.Persistence.Services;
 public interface IUserService
 {
     IEnumerable<UserDto> GetAllUsers();
-    Task<UserDto> GetUserByEmail(string email);
-    Task<UserDto> GetUserById(int id);
-    Task UpdateUserFullName(string firstName,string lastName,User user);
-    Task UpdatePassword(string password,User user);
-    Task GrandRole(User user,Role role);
-    Task DeleteAccount(User user);
+    Task<UserDto> GetUserByEmailAsync(string email);
+    Task<UserDto> GetUserByIdAsync(int id);
+    Task UpdateUserFullNameAsync(string firstName,string lastName,User user);
+    Task UpdatePasswordAsync(string password,User user);
+    Task GrandRoleAsync(User user,Role role);
+    Task DeleteAccountAsync(User user);
 }

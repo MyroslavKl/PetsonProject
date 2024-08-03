@@ -29,7 +29,7 @@ namespace API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddImage([FromBody]UpsertImage upsertImage)
         {
-            await _imageService.AddImage(upsertImage);
+            await _imageService.AddImageAsync(upsertImage);
             return Ok("Image successfully added");
         }
 
@@ -37,7 +37,7 @@ namespace API.Controllers
         public async Task ChangePhoto(string url, [FromRoute]int id)
         {
             var image = await _imageRepository.GetOneAsync(obj => obj.Id ==id);
-            await _imageService.UpdateImage(url,image);
+            await _imageService.UpdateImageAsync(url,image);
         }
     }
 }

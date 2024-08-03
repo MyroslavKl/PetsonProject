@@ -29,7 +29,7 @@ public class AuthService : IAuthService
         _configuration = configuration;
     }
 
-    public async Task Register(CreateUserDto createUserDto)
+    public async Task RegisterAsync(CreateUserDto createUserDto)
     {
         var createUser = _mapper.Map<User>(createUserDto);
         createUser.Password = _hashService.HashPassword(createUser.Password);
@@ -38,7 +38,7 @@ public class AuthService : IAuthService
         await _userRepository.SaveChangesAsync();
     }
 
-    public async Task<string> Login(LoginDto loginDto)
+    public async Task<string> LoginAsync(LoginDto loginDto)
     {
         var user = await _userRepository.GetOneAsync(obj => obj.Email == loginDto.Email);
         if (user == null)

@@ -29,14 +29,14 @@ namespace API.Controllers
         [HttpGet("specific-date")]
         public async Task<IEnumerable<ReserveDto>> GetByDate(DateTime date)
         {
-           var reserves = await _reserveService.GetReservesByDate(date);
+           var reserves = await _reserveService.GetReservesByDateAsync(date);
            return reserves;
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateReserve([FromBody] UpsertReserveDto reserveDto)
         {
-            await _reserveService.CreateReserve(reserveDto);
+            await _reserveService.CreateReserveAsync(reserveDto);
             return Ok("Reserve is created successfully");
         }
 
@@ -44,7 +44,7 @@ namespace API.Controllers
         public async Task<IActionResult> RemoveService([FromRoute]int id)
         {
             var reserve = await _reserveRepository.GetOneAsync(obj => obj.Id == id);
-            await _reserveService.DeleteReserve(reserve);
+            await _reserveService.DeleteReserveAsync(reserve);
             return Ok("Reserve successfully deleted");
         }
 
