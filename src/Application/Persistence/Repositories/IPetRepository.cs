@@ -1,6 +1,9 @@
-﻿namespace Application.Persistence.Repositories;
+﻿using System.Linq.Expressions;
+using Application.Persistence.Repositories.Common;
+using Domain.Entities;
 
-public interface IPetRepository
+namespace Application.Persistence.Repositories;
+
+public interface IPetRepository:IRepository<Pet>
 {
-    
 }

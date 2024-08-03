@@ -1,6 +1,9 @@
-﻿namespace Application.Persistence.Repositories;
+﻿using Application.Persistence.Repositories.Common;
+using Domain.Entities;
 
-public interface IImageRepository
+namespace Application.Persistence.Repositories;
+
+public interface IImageRepository:IRepository<Image>
 {
     
 }

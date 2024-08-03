@@ -1,7 +1,9 @@
 ﻿using Application.Persistence.Repositories;
 using Application.Persistence.Repositories.Common;
+using Application.Persistence.Services;
 using Infrastructure.Persistence.Repositories;
 using Infrastructure.Persistence.Repositories.Common;
+using Infrastructure.Persistence.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,6 +22,11 @@ public static class InfrastructureConfig
         services.AddScoped<IReserveRepository,ReserveRepository>();
         services.AddScoped<IRoleRepository,RoleRepository>();
         services.AddScoped<IUserRepository,UserRepository>();
+        services.AddScoped<IPetRepository,PetRepository>();
+        services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IPetService, PetService>();
+        services.AddScoped<IReserveService, ReserveService>();
+        services.AddScoped<IImageService, ImageService>();
         return services;
     }
 }
