@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <Folder Include="ActionFilters\AuthFilters\" />
-    <Folder Include="ActionFilters\ReserveFilters\" />
     <Folder Include="ActionFilters\RoleFilters\" />
     <Folder Include="ActionFilters\UserFilters\" />
   </ItemGroup>
