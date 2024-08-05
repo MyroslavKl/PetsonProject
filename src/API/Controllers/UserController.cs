@@ -1,3 +1,5 @@
+using Application.ActionFilters.RoleFilters;
+using Application.ActionFilters.UserFilters;
 using Application.DTOs.UserDTOs;
 using Application.Persistence.Repositories;
 using Application.Persistence.Services;
@@ -29,6 +31,7 @@ namespace API.Controllers
         }
 
         [HttpGet("email")]
+        [TypeFilter(typeof(UserExistByEmailFilterAttribute))]
         public async Task<UserDto> GetUserByEmail(string email)
         {
             var user = await _userService.GetUserByEmailAsync(email);
@@ -36,6 +39,7 @@ namespace API.Controllers
         }
 
         [HttpGet("{userId}")]
+        [TypeFilter(typeof(UserExistByIdFilterAttribute))]
         public async Task<UserDto> GetUserById([FromRoute] int userId)
         {
             var user = await _userService.GetUserByIdAsync(userId);
@@ -43,12 +47,14 @@ namespace API.Controllers
         }
 
         [HttpPatch("name/{userId}")]
+        [TypeFilter(typeof(UserExistByIdFilterAttribute))]
         public async Task ChangeName(string firstName,string lastName,[FromRoute]int userId)
         {
             var user = await _userRepository.GetOneAsync(obj => obj.Id == userId);
             await _userService.UpdateUserFullNameAsync(firstName,lastName, user);
         }
         [HttpPatch("password/{userId}")]
+        [TypeFilter(typeof(UserExistByIdFilterAttribute))]
         public async Task ChangePassword(string password,[FromRoute]int userId)
         {
             var user = await _userRepository.GetOneAsync(obj => obj.Id == userId);
@@ -56,15 +62,17 @@ namespace API.Controllers
         }
 
         [HttpPatch("{userId}/grand/{roleId}")]
+        [TypeFilter(typeof(RoleExistByIdFilterAttribute))]
+        [TypeFilter(typeof(UserExistByIdFilterAttribute))]
         public async Task RoleGrant([FromRoute]int userId,[FromRoute]int roleId)
         {
             var user = await _userRepository.GetOneAsync(obj => obj.Id == userId);
             var role = await _roleRepository.GetOneAsync(obj => obj.Id == roleId);
-
             await _userService.GrandRoleAsync(user,role);
         }
          
         [HttpDelete("{userId}")]
+        [TypeFilter(typeof(UserExistByIdFilterAttribute))]
         public async Task<IActionResult> DeleteAccount([FromRoute] int userId)
         {
             var user = await _userRepository.GetOneAsync(obj => obj.Id == userId);

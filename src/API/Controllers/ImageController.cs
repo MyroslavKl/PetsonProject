@@ -1,3 +1,5 @@
+using Application.ActionFilters;
+using Application.ActionFilters.PetFilters;
 using Application.DTOs.ImageDTOs;
 using Application.Persistence.Repositories;
 using Application.Persistence.Services;
