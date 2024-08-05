@@ -1,3 +1,4 @@
+using Application.ActionFilters.AuthFilters;
 using Application.DTOs.AuthDtos;
 using Application.DTOs.UserDTOs;
 using Application.Persistence.Services.AuthServices;
@@ -24,6 +25,7 @@ namespace API.Controllers
         }
         
         [HttpPost("register")]
+        [TypeFilter(typeof(RegisterActionFilterAttribute))]
         public async Task Register([FromBody] CreateUserDto createUserDto)
         {
             await _authService.RegisterAsync(createUserDto);
