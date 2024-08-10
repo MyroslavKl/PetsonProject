@@ -7,6 +7,6 @@ public interface IImageService
 {
     IEnumerable<ImageDto> GetAllImages(int petId);
     Task AddImageAsync(UpsertImage image);
-    Task UpdateImageAsync(string url, Image image);
+    Task DeleteImageAsync(Image image);
     
 }

@@ -1,3 +1,5 @@
+using Application.ActionFilters;
+using Application.ActionFilters.PetFilters;
 using Application.DTOs.PetDTOs;
 using Application.Persistence.Repositories;
 using Application.Persistence.Services;
@@ -27,14 +29,15 @@ namespace API.Controllers
         }
 
         [HttpGet("petSpecies")]
-
+        [TypeFilter(typeof(PetExistBySpeciesFilterAttribute))]
         public async Task<IEnumerable<PetDto>> GetPetsBySpecies(string species)
         {
             var pets = await _petService.GetPetBySpeciesAsync(species);
             return pets;
         }
+        
         [HttpGet("petType")]
-
+        [TypeFilter(typeof(PetExistByTypeFilterAttribute))]
         public async Task<IEnumerable<PetDto>> GetPetsByType(string type)
         {
             var pets = await _petService.GetPetByTypeAsync(type);
@@ -42,18 +45,21 @@ namespace API.Controllers
         }
 
         [HttpPost]
+        [ModelStateFilter]
         public async Task AddPet([FromBody]UpsertPetDto pet)
         {
             await _petService.AddPetAsync(pet);
         }
 
         [HttpPatch("name-update/{id}")]
+        [TypeFilter(typeof(PetExistByIdFilterAttribute))]
         public async Task UpdateName([FromRoute]int id,[FromBody]string name)
         {
             var pet = await _petRepository.GetOneAsync(obj => obj.Id == id);
             await _petService.UpdatePetNameAsync(name,pet);
         }
         [HttpPatch("description-update/{id}")]
+        [TypeFilter(typeof(PetExistByIdFilterAttribute))]
         public async Task UpdateDescription([FromRoute]int id,[FromBody]string description)
         {
             var pet = await _petRepository.GetOneAsync(obj => obj.Id == id);
@@ -61,6 +67,7 @@ namespace API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [TypeFilter(typeof(PetExistByIdFilterAttribute))]
         public async Task<IActionResult> DeletePet([FromRoute] int id)
         {
             var pet = await _petRepository.GetOneAsync(obj => obj.Id == id);

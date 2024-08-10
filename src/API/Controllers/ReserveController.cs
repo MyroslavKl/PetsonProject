@@ -1,3 +1,5 @@
+using Application.ActionFilters;
+using Application.ActionFilters.ReserveFilters;
 using Application.DTOs.ReserveDTOs;
 using Application.Persistence.Repositories;
 using Application.Persistence.Services;
@@ -20,6 +22,7 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
+        [TypeFilter(typeof(ReserveExistByIdFilterAttribute))]
         public IEnumerable<ReserveDto> GetReserves([FromRoute]int id)
         {
             var reserves = _reserveService.GetAllReserves(id);
@@ -27,6 +30,7 @@ namespace API.Controllers
         }
 
         [HttpGet("specific-date")]
+        [TypeFilter(typeof(ReserveExistByDateFilterAttribute))]
         public async Task<IEnumerable<ReserveDto>> GetByDate(DateTime date)
         {
            var reserves = await _reserveService.GetReservesByDateAsync(date);
@@ -34,6 +38,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
+        [ModelStateFilter]
         public async Task<IActionResult> CreateReserve([FromBody] UpsertReserveDto reserveDto)
         {
             await _reserveService.CreateReserveAsync(reserveDto);
@@ -41,6 +46,7 @@ namespace API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [TypeFilter(typeof(ReserveExistByIdFilterAttribute))]
         public async Task<IActionResult> RemoveService([FromRoute]int id)
         {
             var reserve = await _reserveRepository.GetOneAsync(obj => obj.Id == id);

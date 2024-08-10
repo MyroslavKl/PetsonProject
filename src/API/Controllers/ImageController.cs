@@ -1,3 +1,5 @@
+using Application.ActionFilters;
+using Application.ActionFilters.PetFilters;
 using Application.DTOs.ImageDTOs;
 using Application.Persistence.Repositories;
 using Application.Persistence.Services;
@@ -20,6 +22,7 @@ namespace API.Controllers
         }
 
         [HttpGet("{petId}")]
+        [TypeFilter(typeof(PetExistByIdFilterAttribute))]
         public IActionResult GetImages([FromRoute]int petId)
         {
             var images = _imageService.GetAllImages(petId);
@@ -33,11 +36,11 @@ namespace API.Controllers
             return Ok("Image successfully added");
         }
 
-        [HttpPatch("change-url/{id}")]
-        public async Task ChangePhoto(string url, [FromRoute]int id)
+        [HttpPatch("remove-url/{id}")]
+        public async Task DeletePhoto([FromRoute]int id)
         {
             var image = await _imageRepository.GetOneAsync(obj => obj.Id ==id);
-            await _imageService.UpdateImageAsync(url,image);
+            await _imageService.DeleteImageAsync(image);
         }
     }
 }

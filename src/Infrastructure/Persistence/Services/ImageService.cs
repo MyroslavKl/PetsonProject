@@ -31,10 +31,9 @@ public class ImageService:IImageService
         await _imageRepository.SaveChangesAsync();
     }
 
-    public async Task UpdateImageAsync(string url, Image image)
+    public async Task DeleteImageAsync(Image image)
     {
-        image.Url = url;
-        _imageRepository.Update(image);
+        _imageRepository.Delete(image);
         await _imageRepository.SaveChangesAsync();
     }
 }
