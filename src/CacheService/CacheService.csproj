@@ -6,13 +6,15 @@
         <Nullable>enable</Nullable>
         <RootNamespace>CacheServices</RootNamespace>
     </PropertyGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\Application\Application.csproj" />
-    </ItemGroup>
+    
 
     <ItemGroup>
       <PackageReference Include="StackExchange.Redis" Version="2.8.0" />
+    </ItemGroup>
+    
+
+    <ItemGroup>
+      <ProjectReference Include="..\Application\Application.csproj" />
     </ItemGroup>
 
 </Project>

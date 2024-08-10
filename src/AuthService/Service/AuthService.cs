@@ -8,6 +8,7 @@ using Application.Persistence.Repositories;
 using Application.Persistence.Services.AuthServices;
 using Application.Persistence.Services.HashServices;
 using AutoMapper;
+using CacheServices.Service;
 using Domain.Entities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -20,13 +21,15 @@ public class AuthService : IAuthService
     private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
     private readonly IConfiguration _configuration;
+    private readonly ICacheService _cacheService;
 
-    public AuthService(IHashService hashService, IUserRepository userRepository, IMapper mapper,IConfiguration configuration)
+    public AuthService(IHashService hashService, IUserRepository userRepository, IMapper mapper,IConfiguration configuration,ICacheService cacheService)
     {
         _hashService = hashService;
         _userRepository = userRepository;
         _mapper = mapper;
         _configuration = configuration;
+        _cacheService = cacheService;
     }
 
     public async Task RegisterAsync(CreateUserDto createUserDto)
@@ -36,6 +39,9 @@ public class AuthService : IAuthService
         createUser.RoleId = 1;
         await _userRepository.InsertAsync(createUser);
         await _userRepository.SaveChangesAsync();
+        Console.WriteLine($"user{createUser.Id}");
+        var expirationTime = DateTime.Now.AddMinutes(3);
+        _cacheService.SetData($"user{createUser.Id}",createUserDto,expirationTime);
     }
 
     public async Task<string> LoginAsync(LoginDto loginDto)

@@ -8,6 +8,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Application\Application.csproj" />
+      <ProjectReference Include="..\CacheService\CacheService.csproj" />
       <ProjectReference Include="..\HashService\HashService.csproj" />
     </ItemGroup>
 

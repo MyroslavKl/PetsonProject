@@ -2,6 +2,7 @@
 using Application.Persistence.Repositories;
 using Application.Persistence.Services;
 using AutoMapper;
+using CacheServices.Service;
 using Domain.Entities;
 
 namespace Infrastructure.Persistence.Services;
@@ -11,18 +12,30 @@ public class UserService:IUserService
 
     private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
+    private readonly ICacheService _cacheService;
 
-    public UserService(IUserRepository userRepository,IMapper mapper)
+    public UserService(IUserRepository userRepository,IMapper mapper,ICacheService cacheService)
     {
         _userRepository = userRepository;
         _mapper = mapper;
+        _cacheService = cacheService;
     }
     
     public IEnumerable<UserDto> GetAllUsers()
     {
+        var cacheDataUsers = _cacheService.GetData<IEnumerable<UserDto>>("user");
+        if (cacheDataUsers != null && cacheDataUsers.Count() > 0)
+        {
+            return cacheDataUsers;
+        }
+
         var users = _userRepository.GetAll();
-        var usersDto = _mapper.Map<IEnumerable<UserDto>>(users);
-        return usersDto;
+        cacheDataUsers = _mapper.Map<IEnumerable<UserDto>>(users);
+
+        var expirationTime = DateTime.Now.AddMinutes(3);
+        _cacheService.SetData("user",cacheDataUsers,expirationTime);
+        
+        return cacheDataUsers;
     }
 
     public async Task<UserDto> GetUserByEmailAsync(string email)
@@ -64,6 +77,7 @@ public class UserService:IUserService
     public async Task DeleteAccountAsync(User user)
     {
         _userRepository.Delete(user);
+        _cacheService.RemoveData($"user{user.Id}");
         await _userRepository.SaveChangesAsync();
     }
 }
