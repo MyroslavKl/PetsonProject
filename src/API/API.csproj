@@ -25,7 +25,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\AuthService\AuthService.csproj" />
-      <ProjectReference Include="..\CacheServices\CacheServices.csproj" />
+      <ProjectReference Include="..\CacheService\CacheService.csproj" />
       <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
     </ItemGroup>
 
