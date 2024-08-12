@@ -1,4 +1,5 @@
-﻿using Application.DTOs.UserDTOs;
+﻿using Application.Additional;
+using Application.DTOs.UserDTOs;
 using Application.Persistence.Repositories;
 using Application.Persistence.Services;
 using AutoMapper;
@@ -13,12 +14,14 @@ public class UserService:IUserService
     private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
     private readonly ICacheService _cacheService;
+    private readonly IUserAdditional _userAdditional;
 
-    public UserService(IUserRepository userRepository,IMapper mapper,ICacheService cacheService)
+    public UserService(IUserRepository userRepository,IMapper mapper,ICacheService cacheService,IUserAdditional userAdditional)
     {
         _userRepository = userRepository;
         _mapper = mapper;
         _cacheService = cacheService;
+        _userAdditional = userAdditional;
     }
     
     public IEnumerable<UserDto> GetAllUsers()
@@ -47,17 +50,32 @@ public class UserService:IUserService
 
     public async Task<UserDto> GetUserByIdAsync(int id)
     {
+        var userCache = _cacheService.GetData<UserDto>($"user{id}");
+        if (userCache != null)
+        {
+            return userCache;
+        }
         var userById = await _userRepository.GetOneAsync(user => user.Id == id);
         var userByIdDto = _mapper.Map<UserDto>(userById);
         return userByIdDto;
     }
 
-    public async Task UpdateUserFullNameAsync(string firstName,string lastName, User user) 
+    public async Task UpdateUserFullNameAsync(string firstName,string lastName, User user)
     {
-        user.FirstName = firstName;
-        user.LastName = lastName;
-        _userRepository.Update(user);
-        await _userRepository.SaveChangesAsync();
+        var userCache = _cacheService.GetData<UserDto>($"user{user.Id}");
+        var userDto = _mapper.Map<UserDto>(user);
+        var expirationTime = DateTime.Now.AddMinutes(3);
+        await _userAdditional.UpdateMethodAsync(firstName,lastName,user);
+        if (userCache != null)
+        {
+           _cacheService.RemoveData($"user{user.Id}");
+           _cacheService.SetData($"user{user.Id}",userDto,expirationTime);
+        }
+        else
+        {
+            _cacheService.SetData($"user{user.Id}",userDto,expirationTime);
+        }
+
     }
 
     public async Task UpdatePasswordAsync(string password, User user)
@@ -77,7 +95,8 @@ public class UserService:IUserService
     public async Task DeleteAccountAsync(User user)
     {
         _userRepository.Delete(user);
-        _cacheService.RemoveData($"user{user.Id}");
         await _userRepository.SaveChangesAsync();
+        
+        _cacheService.RemoveData($"user{user.Id}");
     }
 }

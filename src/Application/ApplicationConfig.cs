@@ -11,6 +11,7 @@ public static class ApplicationConfig
     {
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
         services.AddScoped<PetAdditional>();
+        services.AddScoped<IUserAdditional,UserAdditional>();
         return services;
     }
 }
