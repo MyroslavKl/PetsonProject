@@ -1,8 +1,4 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Text;
-using Application.Additional.Auth;
+﻿using Application.Additional.Auth;
 using Application.DTOs.AuthDtos;
 using Application.DTOs.UserDTOs;
 using Application.Persistence.Repositories;
@@ -12,7 +8,6 @@ using AutoMapper;
 using CacheServices.Service;
 using Domain.Entities;
 using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
 
 namespace AuthService.Service;
 
@@ -43,13 +38,13 @@ public class AuthService : IAuthService
     public async Task RegisterAsync(CreateUserDto createUserDto)
     {
         var createUser = _mapper.Map<User>(createUserDto);
-        var userDto = _mapper.Map<UserDto>(createUser);
         createUser.Password = _hashService.HashPassword(createUser.Password);
         createUser.RoleId = 1;
+        var userDto = _mapper.Map<UserDto>(createUser);
+        var expirationTime = DateTime.Now.AddMinutes(3);
         await _userRepository.InsertAsync(createUser);
         await _userRepository.SaveChangesAsync();
-        Console.WriteLine($"user{createUser.Id}");
-        var expirationTime = DateTime.Now.AddMinutes(3);
+        userDto.Id = createUser.Id;
         _cacheService.SetData($"user{createUser.Id}",userDto,expirationTime);
     }
 
