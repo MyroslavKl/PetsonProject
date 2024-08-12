@@ -3,7 +3,7 @@ using Application.Persistence.Repositories;
 using AutoMapper;
 using Domain.Entities;
 
-namespace Application.Additional;
+namespace Application.Additional.Pet;
 
 public class PetAdditional
 {
@@ -16,7 +16,7 @@ public class PetAdditional
         _mapper = mapper;
     }
 
-    public async Task PetUpdate(Pet pet)
+    public async Task PetUpdate(Domain.Entities.Pet pet)
     {
         _petRepository.Update(pet);
         await _petRepository.SaveChangesAsync();

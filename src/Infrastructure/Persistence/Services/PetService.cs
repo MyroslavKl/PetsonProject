@@ -1,4 +1,4 @@
-﻿using Application.Additional;
+﻿using Application.Additional.Pet;
 using Application.DTOs.ImageDTOs;
 using Application.DTOs.PetDTOs;
 using Application.Persistence.Repositories;

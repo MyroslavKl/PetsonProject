@@ -1,7 +1,7 @@
 ﻿using Application.Persistence.Repositories;
 using Domain.Entities;
 
-namespace Application.Additional;
+namespace Application.Additional.User;
 
 public class UserAdditional:IUserAdditional
 {
@@ -12,7 +12,7 @@ public class UserAdditional:IUserAdditional
         _userRepository = userRepository;
     }
 
-    public async Task UpdateMethodAsync(string firstName, string lastName, User user)
+    public async Task UpdateMethodAsync(string firstName, string lastName, Domain.Entities.User user)
     {
         user.FirstName = firstName;
         user.LastName = lastName;
