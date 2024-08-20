@@ -1,4 +1,5 @@
-﻿using CacheServices.Service;
+﻿using Application.Persistence.Services.CacheService;
+using CacheServices.Service;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 

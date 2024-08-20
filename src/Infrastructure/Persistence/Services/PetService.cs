@@ -3,8 +3,8 @@ using Application.DTOs.ImageDTOs;
 using Application.DTOs.PetDTOs;
 using Application.Persistence.Repositories;
 using Application.Persistence.Services;
+using Application.Persistence.Services.CacheService;
 using AutoMapper;
-using CacheServices.Service;
 using Domain.Entities;
 
 namespace Infrastructure.Persistence.Services;

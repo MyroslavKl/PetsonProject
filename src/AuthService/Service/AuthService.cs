@@ -3,9 +3,9 @@ using Application.DTOs.AuthDtos;
 using Application.DTOs.UserDTOs;
 using Application.Persistence.Repositories;
 using Application.Persistence.Services.AuthServices;
+using Application.Persistence.Services.CacheService;
 using Application.Persistence.Services.HashServices;
 using AutoMapper;
-using CacheServices.Service;
 using Domain.Entities;
 using Microsoft.Extensions.Configuration;
 

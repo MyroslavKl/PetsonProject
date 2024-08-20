@@ -7,10 +7,8 @@ namespace Infrastructure.Persistence.Repositories;
 
 public class PetRepository:Repository<Pet>,IPetRepository
 {
-    private readonly PetsonContext _context;
     public PetRepository(PetsonContext dbContext) : base(dbContext)
     {
-        _context = dbContext;
     }
     
 }
