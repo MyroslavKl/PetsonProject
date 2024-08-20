@@ -1,4 +1,5 @@
-﻿using Application.DTOs.ImageDTOs;
+﻿using Application.Additional.Image;
+using Application.DTOs.ImageDTOs;
 using Application.Persistence.Repositories;
 using Application.Persistence.Services;
 using Application.Persistence.Services.CacheService;
@@ -12,12 +13,17 @@ public class ImageService:IImageService
     private readonly IImageRepository _imageRepository;
     private readonly IMapper _mapper;
     private readonly ICacheService _cacheService;
+    private readonly IImageAdditional _imageAdditional;
 
-    public ImageService(IImageRepository imageRepository,IMapper mapper,ICacheService cacheService)
+    public ImageService(IImageRepository imageRepository,
+        IMapper mapper,
+        ICacheService cacheService,
+        IImageAdditional imageAdditional)
     {
         _imageRepository = imageRepository;
         _mapper = mapper;
         _cacheService = cacheService;
+        _imageAdditional = imageAdditional;
 
     }
     public IEnumerable<ImageDto> GetAllImages(int petId) ////
@@ -29,12 +35,8 @@ public class ImageService:IImageService
 
     public async Task AddImageAsync(UpsertImage imageDto)
     {
-        var image = _mapper.Map<Image>(imageDto);
-        await _imageRepository.InsertAsync(image);
-        await _imageRepository.SaveChangesAsync();
-        var dto = _mapper.Map<ImageDto>(image);
-        var expirationTime = DateTime.Now.AddMinutes(3);
-        _cacheService.SetData($"image{image.Id}",dto,expirationTime);
+        var image = await _imageAdditional.AddImageAdditional(imageDto);
+        _imageAdditional.SetImageAdditional(image);
     }
 
     public async Task DeleteImageAsync(Image image)

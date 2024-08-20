@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using Application.Additional;
 using Application.Additional.Auth;
+using Application.Additional.Image;
 using Application.Additional.Pet;
 using Application.Additional.User;
 using Microsoft.Extensions.Configuration;
@@ -16,6 +17,7 @@ public static class ApplicationConfig
         services.AddScoped<PetAdditional>();
         services.AddScoped<IUserAdditional,UserAdditional>();
         services.AddScoped<IAuthAdditional,AuthAdditional>();
+        services.AddScoped<IImageAdditional,ImageAdditional>();
         return services;
     }
 }
