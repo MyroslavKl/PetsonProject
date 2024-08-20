@@ -41,8 +41,7 @@ public class ImageService:IImageService
 
     public async Task DeleteImageAsync(Image image)
     {
-        _imageRepository.Delete(image);
-        await _imageRepository.SaveChangesAsync();
+        await _imageAdditional.DeleteImageAdditional(image);
         _cacheService.RemoveData($"image{image.Id}");
     }
 }

@@ -31,4 +31,10 @@ public class ImageAdditional:IImageAdditional
         var expirationTime = DateTime.Now.AddMinutes(3);
         _cacheService.SetData($"image{image.Id}",dto,expirationTime);
     }
+
+    public async Task DeleteImageAdditional(Domain.Entities.Image image)
+    {
+        _imageRepository.Delete(image);
+        await _imageRepository.SaveChangesAsync();
+    }
 }
