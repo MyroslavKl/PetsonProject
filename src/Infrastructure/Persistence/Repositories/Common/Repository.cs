@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
 using Application.Persistence.Repositories.Common;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Infrastructure.Persistence.Repositories.Common;
 
@@ -37,7 +38,7 @@ public class Repository<TEntity>:IRepository<TEntity> where TEntity: class
     }
 
     public async Task InsertAsync(TEntity obj)
-    {
+    { 
         await _dbSet.AddAsync(obj);
     }
 

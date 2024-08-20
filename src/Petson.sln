@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthService", "AuthService\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashService", "HashService\HashService.csproj", "{AD3C1563-2E9F-4A84-8DB2-456B489653E4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheService", "CacheService\CacheService.csproj", "{DCCED2D5-BA5E-427A-A247-B0095C424A3C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{AD3C1563-2E9F-4A84-8DB2-456B489653E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD3C1563-2E9F-4A84-8DB2-456B489653E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD3C1563-2E9F-4A84-8DB2-456B489653E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCCED2D5-BA5E-427A-A247-B0095C424A3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCCED2D5-BA5E-427A-A247-B0095C424A3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCCED2D5-BA5E-427A-A247-B0095C424A3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCCED2D5-BA5E-427A-A247-B0095C424A3C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

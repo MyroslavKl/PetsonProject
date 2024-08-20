@@ -1,5 +1,8 @@
 ﻿using System.Reflection;
 using Application.Additional;
+using Application.Additional.Auth;
+using Application.Additional.Pet;
+using Application.Additional.User;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,6 +14,8 @@ public static class ApplicationConfig
     {
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
         services.AddScoped<PetAdditional>();
+        services.AddScoped<IUserAdditional,UserAdditional>();
+        services.AddScoped<IAuthAdditional,AuthAdditional>();
         return services;
     }
 }
